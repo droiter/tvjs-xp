@@ -5,3 +5,4 @@ build.list.js
 cdn_status.js
 cdn.config.js
 *-dev.js
+dist
