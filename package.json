@@ -8,6 +8,7 @@
     "compile-prod": "node ./webpack/index-compiler.js --prod",
     "eslint": "./node_modules/.bin/eslint --ext .js,.vue src",
     "dev": "webpack serve --config webpack/dev.config.js --mode development --progress --hot --port=$PORT",
+    "buildall": "webpack  --config webpack/buildall.config.js --mode production --progress",
     "build": "webpack  --config webpack/build.config.js --mode production --progress"
   },
   "author": "C451",
