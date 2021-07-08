@@ -1,7 +1,7 @@
 <template>
     <div>
         <div id="tvjs-header">
-            <h1><img src="/assets/logo.png"/>
+            <h1><img src="./assets/logo.png"/>
                 <label>Std Extension Pack</label>
             </h1>
             <multiselect :list="ext_names" @onstate="reset"/>
