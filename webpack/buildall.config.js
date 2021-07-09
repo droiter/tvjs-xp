@@ -72,9 +72,9 @@ module.exports = {
         new HtmlWebpackPlugin({
             template: './src/index.html'
         }),
-        new ImportPlugin(
+        //new ImportPlugin(  // why comment out this fix the script hang?
             //'http://localhost:8080/trading-vue.js',
-            './node_modules/trading-vue-js/dist'
-        )
+            //'./node_modules/trading-vue-js/dist'
+        //)
     ]
 }
