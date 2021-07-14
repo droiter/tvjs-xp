@@ -10,6 +10,7 @@
         :extensions="ext"
         :overlays="ovs"
         :x-settings="xsett"
+        :indexBased="indexBased"
     />
 </template>
 <script>
@@ -31,6 +32,14 @@ export default {
             this.height = window.innerHeight - 50
         }
     },
+    created() {
+        window.addEventListener('setItem0', ()=> {
+            var tvjs = parent.window['tvjs'];
+            var tvjs_data = [];
+            tvjs_data["ohlcv"] = tvjs[0]["stock"];
+            this.dc = new DataCube(tvjs_data);
+        })
+    },
     mounted() {
         window.addEventListener('resize', this.onResize)
         this.onResize()
@@ -50,8 +59,19 @@ export default {
         window.removeEventListener('resize', this.onResize)
     },
     data() {
+        var chartdata;
+        if ( ! ('tvjs' in parent.window) )
+            chartdata = new DataCube(Data);
+        else {
+            var tvjs = parent.window['tvjs'];
+            var tvjs_data = [];
+            tvjs_data["ohlcv"] = tvjs[0]["stock"];
+            chartdata = new DataCube(tvjs_data);
+        }
         return {
-            dc: new DataCube(Data),
+            //dc: new DataCube(Data),
+            dc: chartdata,
+            indexBased: true,
             width: window.innerWidth,
             height: window.innerHeight,
             xsett: {
