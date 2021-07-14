@@ -83,7 +83,9 @@ export default {
     },
     data() {
         return {
-            chart: new DataCube(Data), // Data will be here,
+            //chart: new DataCube(Data), // Data will be here,
+            chart: new DataCube({}), // Data will be here,
+            indexBased: true,
             width: window.innerWidth,
             height: window.innerHeight,
             extensions: Object.values(Extensions),
