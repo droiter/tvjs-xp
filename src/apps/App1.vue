@@ -37,7 +37,8 @@ export default {
             var tvjs = parent.window['tvjs'];
             var tvjs_data = [];
             tvjs_data["ohlcv"] = tvjs[0]["stock"];
-            this.dc = new DataCube(tvjs_data);
+            //this.dc = new DataCube(tvjs_data);
+            this.dc = new DataCube(parent.window['tvjs_data'][0]);
         })
     },
     mounted() {
@@ -60,13 +61,13 @@ export default {
     },
     data() {
         var chartdata;
-        if ( ! ('tvjs' in parent.window) )
+        if ( ! ('tvjs_data' in parent.window) )
             chartdata = new DataCube(Data);
         else {
             var tvjs = parent.window['tvjs'];
             var tvjs_data = [];
             tvjs_data["ohlcv"] = tvjs[0]["stock"];
-            chartdata = new DataCube(tvjs_data);
+            chartdata = new DataCube(parent.window['tvjs_data'][0]);
         }
         return {
             //dc: new DataCube(Data),
