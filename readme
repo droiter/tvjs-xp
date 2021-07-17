@@ -1,3 +1,9 @@
 To install modified local trading-vue-js lib
 npm uninstall trading-vue-js
 npm install ../../testvue/trading-vue-js
+
+--update:
+
+1. npm install ../../testvue/trading-vue-js
+2. npm install
+
