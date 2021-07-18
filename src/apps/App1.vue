@@ -39,13 +39,29 @@ export default {
             tvjs_data["ohlcv"] = tvjs[0]["stock"];
             //this.dc = new DataCube(tvjs_data);
             this.dc = new DataCube(parent.window['tvjs_data'][0]);
+            
+            var last = parent.window["tvjs_data"][0]["chart"]["data"].length
+            console.log("range", this.$refs.tvjs.getRange())
+            console.log("last", last)
+            this.$refs.tvjs.setRange(0, last)
         })
+        //console.log("range", this.$refs.tvjs, this.$refs.tvjs.getRange())
     },
     mounted() {
         window.addEventListener('resize', this.onResize)
         this.onResize()
         window.dc = this.dc
         window.tv = this.$refs.tvjs
+
+        /*console.log("mounted")
+
+        if ("tvjs_data" in parent.window) {
+            var last = parent.window["tvjs_data"][0]["chart"]["data"].length
+            console.log("range", this.$refs.tvjs.getRange())
+            console.log("last", last)
+            this.$nextTick(() =>
+                this.$refs.tvjs.setRange(0, last))
+        }*/
     },
     computed: {
         colors() {
