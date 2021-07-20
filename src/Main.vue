@@ -2,7 +2,7 @@
     <div>
         <div id="tvjs-header">
             <h1><img src="./assets/logo.png"/>
-                <label>Std Extension Pack</label>
+                <label>回测结果</label>
             </h1>
             <multiselect :list="ext_names" @onstate="reset"/>
             <span class="night-mode">
