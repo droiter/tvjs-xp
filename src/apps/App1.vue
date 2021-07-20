@@ -1,6 +1,6 @@
 <template>
     <trading-vue :data="dc" :width="this.width" :height="this.height"
-        title-txt="TVJS XP" :key="resetkey"
+        title-txt="上证指数" :key="resetkey"
         ref="tvjs"
         :legend-buttons="['display', 'settings', 'up', 'down', 'add', 'remove']"
         :chart-config="{DEFAULT_LEN:70}"
