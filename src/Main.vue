@@ -7,7 +7,7 @@
             <multiselect v-tooltip.bottom="'OK'" :list="ext_names" @onstate="reset"/>
             <span class="night-mode">
                 <input type="checkbox" v-model="night">
-                <label>NM</label>
+                <label>切换背景</label>
             </span>
         </div>
         <div id="app-conainer" :style="{top: top+'px'}">
