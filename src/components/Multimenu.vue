@@ -1,10 +1,14 @@
 <template>
 <div id="list1" class="dropdown-check-list" tabindex="100">
-    <span class="anchor">Extensions</span>
-    <ul class="items" >
+    <span class="anchor"
+        @mouseenter="mouseEntrace()"
+    >交易记录</span>
+    <ul class="items" 
+        @mouseleave="mouseLeave()"
+    >
         <li v-for="(name, index) of list" 
         @click="on_select(name)"
-        @mouseenter="mouseEnter(index)"
+        <!-- @mouseenter="mouseEnter(index)" -->
         >
             <!-- <input type="checkbox" v-model="checks[name]"
                 @input="on_switch"/> -->
@@ -40,10 +44,20 @@ export default {
             var checkList = document.getElementById('list1')
             checkList.classList.remove('visible');
         },
-        mouseEnter(name) {
+        /*mouseEnter(name) {
             console.log('mouseEnter', name)
-        }
-
+        },*/
+        mouseEntrace(name) {
+            console.log('mouseEntrace', name)
+            var checkList = document.getElementById('list1')
+            if (!checkList.classList.contains('visible'))
+                checkList.classList.add('visible')
+        },
+        mouseLeave(name) {
+            console.log('mouseLeave', name)
+            var checkList = document.getElementById('list1')
+            checkList.classList.remove('visible');
+        },
     },
     data() {
         return {
