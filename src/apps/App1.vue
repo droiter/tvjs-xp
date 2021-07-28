@@ -38,12 +38,20 @@ export default {
             var tvjs_data = [];
             tvjs_data["ohlcv"] = tvjs[0]["stock"];
             //this.dc = new DataCube(tvjs_data);
-            this.dc = new DataCube(parent.window['tvjs_data'][0]);
+            this.dc = new DataCube(parent.window['tvjs_data'][1]);
             
-            var last = parent.window["tvjs_data"][0]["chart"]["data"].length
+            var last = parent.window["tvjs_data"][1]["chart"]["data"].length
             console.log("range", this.$refs.tvjs.getRange())
             console.log("last", last)
-            this.$refs.tvjs.setRange(0, last)
+            /*
+            for( var ex of this.ext ) { //in add_overlay -> update_ids, the data is old, but the bug havn't been fixed
+                if ( ex.Main.__name__ == "legend-buttons" ) { //update data in extension
+                    console.log("update_tvdcsett", this.dc, this.$refs.tvjs.data, this.$refs.tvjs.xSettings, ex)
+                    ex.Main.prototype.update_tvdcsett(this.$refs.tvjs, this.dc, this.$refs.tvjs.xSettings[ex.Main.__name__])
+                }
+            }*/
+            this.resetkey++ //trigger vue component recreate
+            //this.$refs.tvjs.setRange(0, last)
         })
         //console.log("range", this.$refs.tvjs, this.$refs.tvjs.getRange())
     },
@@ -83,7 +91,7 @@ export default {
             var tvjs = parent.window['tvjs'];
             var tvjs_data = [];
             tvjs_data["ohlcv"] = tvjs[0]["stock"];
-            chartdata = new DataCube(parent.window['tvjs_data'][0]);
+            chartdata = new DataCube(parent.window['tvjs_data'][1]);
         }
         return {
             //dc: new DataCube(Data),
