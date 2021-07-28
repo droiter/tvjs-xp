@@ -8,7 +8,6 @@
     >
         <li v-for="(name, index) of list" 
         @click="on_select(name)"
-        <!-- @mouseenter="mouseEnter(index)" -->
         >
             <!-- <input type="checkbox" v-model="checks[name]"
                 @input="on_switch"/> -->
