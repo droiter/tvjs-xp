@@ -16,6 +16,13 @@ export default class Main {
 
     }
 
+    update_tvdcsett(tv, dc, sett) {
+        //this.widgets = {}
+        this.tv = tv
+        this.dc = dc
+        this.sett = sett
+    }
+
     // Listens to all tvjs events, creates new widgets
     update(e) {
         switch(e.event) {
