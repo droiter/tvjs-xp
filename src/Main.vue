@@ -4,7 +4,9 @@
             <h1><img src="./assets/logo.png"/>
                 <label>回测结果</label>
             </h1>
-            <multiselect v-tooltip.bottom="'OK'" :list="ext_names" @onstate="reset"/>
+            <multimenu v-tooltip.bottom="'OK'" :list="ext_names" @onstate="reset"/>
+            
+            <!-- <multiselect v-tooltip.bottom="'OK'" :list="ext_names" @onstate="reset"/> -->
             <span class="night-mode">
                 <input type="checkbox" v-model="night">
                 <label>切换背景</label>
@@ -16,11 +18,11 @@
                 :ext="extensions">
             </component>
         </div>
-        <div class="app-tags">
+        <!-- <div class="app-tags">
             <app-tag v-for="app of apps" :id="app.id"
                 :sel="current === app.id" :key="app.id"
                 @select="onselect"/>
-        </div>
+        </div> -->
     </div>
 </template>
 
@@ -29,6 +31,7 @@ import TradingVue from 'trading-vue-js'
 import { DataCube } from 'trading-vue-js'
 import StdInput from './components/StdInput.vue'
 import Multiselect from './components/Multiselect.vue'
+import Multimenu from './components/Multimenu.vue'
 import AppTag from './components/AppTag.vue'
 import Data from '../data/data.json'
 import Extensions from './index_dev'
@@ -40,7 +43,7 @@ export default {
     name: 'app',
     msg:  "okkkkkkk",
     components: {
-        TradingVue, StdInput, Multiselect, AppTag
+        TradingVue, StdInput, Multiselect, Multimenu, AppTag
     },
     methods: {
         onResize() {
@@ -103,8 +106,11 @@ export default {
     },
     computed: {
         current_app() {
+            return App1
+            /*
             return this.apps.find(
                 x => x.id === this.current).comp
+            */
         }
     }
 }
