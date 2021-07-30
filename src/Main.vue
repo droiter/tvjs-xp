@@ -4,7 +4,7 @@
             <h1><img src="./assets/logo.png"/>
                 <label>回测结果</label>
             </h1>
-            <multimenu v-tooltip.bottom="'OK'" :list="ext_names" @onStockSel="StockSel"/>
+            <multimenu v-tooltip.left="'OK'" :list="ext_names" @onStockSel="StockSel"/>
             
             <!-- <multiselect v-tooltip.bottom="'OK'" :list="ext_names" @onstate="reset"/> -->
             <span class="night-mode">
@@ -81,6 +81,20 @@ export default {
             
             console.log("sele", this)
             this.resetkey++ //trigger vue component recreate
+        },
+        getMenuItem() {
+            if ( ! ('tvjs_data' in parent.window) )
+                //chartdata = new DataCube(Data);
+                return []
+            else {
+                var menuitem = ["上证指数"]
+                console.log("menu", parent.window['tvjs_data'])
+                for ( var i =1; i < Object.keys(parent.window['tvjs_data']).length; i++) {
+                    menuitem.push(parent.window['tvjs_data'][i]["figtitle"])
+                    console.log("mi", parent.window['tvjs_data'][i]["figtitle"])
+                }
+                return menuitem
+            }
         }
     },
     mounted() {
@@ -97,6 +111,7 @@ export default {
     created() {
         window.addEventListener('setItem0', ()=> {
             this.chart = new DataCube(parent.window['tvjs_data'][0]);
+            this.ext_names = this.getMenuItem()
             
             console.log("last", this)
             /*
@@ -127,7 +142,7 @@ export default {
             width: window.innerWidth,
             height: window.innerHeight,
             extensions: Object.values(Extensions),
-            ext_names: Object.keys(Extensions),
+            ext_names: this.getMenuItem(), //Object.keys(Extensions),
             night: true,
             current: 'app-1',
             top: 50,
