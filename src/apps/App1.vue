@@ -1,6 +1,6 @@
 <template>
     <trading-vue :data="dc" :width="this.width" :height="this.height"
-        title-txt="上证指数" :key="resetkey"
+        :title-txt="title_stock" :key="resetkey"
         ref="tvjs"
         :legend-buttons="['display', 'settings', 'up', 'down', 'add', 'remove']"
         :chart-config="{DEFAULT_LEN:70}"
@@ -22,9 +22,15 @@ import Data from '../../data/data.json'
 
 export default {
     name: 'App1',
-    props: ['night', 'ext', 'resetkey'],
+    props: ['night', 'ext', 'stockid', 'pdata', 'resetkey'],
     components: {
         TradingVue
+    },
+    watch: { 
+        pdata: function(newVal, oldVal) { // watch it
+            console.log('Prop changed: ', newVal, oldVal)
+            this.dc = this.pdata
+        }
     },
     methods: {
         onResize(event) {
@@ -33,7 +39,7 @@ export default {
         }
     },
     created() {
-        window.addEventListener('setItem0', ()=> {
+        window.addEventListener('setItem1', ()=> {
             var tvjs = parent.window['tvjs'];
             var tvjs_data = [];
             tvjs_data["ohlcv"] = tvjs[0]["stock"];
@@ -85,8 +91,9 @@ export default {
     },
     data() {
         var chartdata;
-        if ( ! ('tvjs_data' in parent.window) )
-            chartdata = new DataCube(Data);
+        if ( ! ('tvjs_data' in parent.window) || true )
+            //chartdata = new DataCube(Data);
+            chartdata = this.pdata
         else {
             var tvjs = parent.window['tvjs'];
             var tvjs_data = [];
@@ -95,6 +102,7 @@ export default {
         }
         return {
             //dc: new DataCube(Data),
+            title_stock: "上证指数",
             dc: chartdata,
             indexBased: true,
             width: window.innerWidth,

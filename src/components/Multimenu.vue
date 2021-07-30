@@ -7,7 +7,7 @@
         @mouseleave="mouseLeave()"
     >
         <li v-for="(name, index) of list" 
-        @click="on_select(name)"
+        @click="on_select(index)"
         >
             <!-- <input type="checkbox" v-model="checks[name]"
                 @input="on_switch"/> -->
@@ -38,10 +38,11 @@ export default {
                 this.$emit('onstate', this.checks)
             })
         },
-        on_select(name) {
-            console.log(name)
+        on_select(index) {
+            console.log(index)
             var checkList = document.getElementById('list1')
             checkList.classList.remove('visible');
+            this.$emit('onStockSel', index)
         },
         /*mouseEnter(name) {
             console.log('mouseEnter', name)

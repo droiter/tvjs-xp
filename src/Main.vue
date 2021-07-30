@@ -4,7 +4,7 @@
             <h1><img src="./assets/logo.png"/>
                 <label>回测结果</label>
             </h1>
-            <multimenu v-tooltip.bottom="'OK'" :list="ext_names" @onstate="reset"/>
+            <multimenu v-tooltip.bottom="'OK'" :list="ext_names" @onStockSel="StockSel"/>
             
             <!-- <multiselect v-tooltip.bottom="'OK'" :list="ext_names" @onstate="reset"/> -->
             <span class="night-mode">
@@ -15,6 +15,8 @@
         <div id="app-conainer" :style="{top: top+'px'}">
             <component v-bind:is="current_app"
                 :night="night" :resetkey="resetkey"
+                :stock_id="stockid"
+                :pdata="chart"
                 :ext="extensions">
             </component>
         </div>
@@ -72,6 +74,13 @@ export default {
         },
         onselect(id) {
             this.current = id
+        },
+        StockSel(index) {
+            console.log("stocksel", index)
+            this.chart = new DataCube(parent.window['tvjs_data'][index]);
+            
+            console.log("sele", this)
+            this.resetkey++ //trigger vue component recreate
         }
     },
     mounted() {
@@ -85,10 +94,35 @@ export default {
     beforeDestroy() {
         window.removeEventListener('resize', this.onResize)
     },
+    created() {
+        window.addEventListener('setItem0', ()=> {
+            this.chart = new DataCube(parent.window['tvjs_data'][0]);
+            
+            console.log("last", this)
+            /*
+            for( var ex of this.ext ) { //in add_overlay -> update_ids, the data is old, but the bug havn't been fixed
+                if ( ex.Main.__name__ == "legend-buttons" ) { //update data in extension
+                    console.log("update_tvdcsett", this.dc, this.$refs.tvjs.data, this.$refs.tvjs.xSettings, ex)
+                    ex.Main.prototype.update_tvdcsett(this.$refs.tvjs, this.dc, this.$refs.tvjs.xSettings[ex.Main.__name__])
+                }
+            }*/
+            this.resetkey++ //trigger vue component recreate
+            //this.$refs.tvjs.setRange(0, last)
+        })
+        //console.log("range", this.$refs.tvjs, this.$refs.tvjs.getRange())
+    },
     data() {
+        var chartdata;
+        if ( ! ('tvjs_data' in parent.window) )
+            //chartdata = new DataCube(Data);
+            chartdata = new DataCube(Data)
+        else {
+            chartdata = new DataCube(parent.window['tvjs_data'][0]);
+        }
+        console.log("data")
         return {
-            //chart: new DataCube(Data), // Data will be here,
-            chart: new DataCube({}), // Data will be here,
+            chart: chartdata, // Data will be here,
+            //chart: new DataCube({}), // Data will be here,
             indexBased: true,
             width: window.innerWidth,
             height: window.innerHeight,
@@ -98,6 +132,7 @@ export default {
             current: 'app-1',
             top: 50,
             resetkey: 0,
+            stockid: 0,
             apps: [
                 { id: 'app-1', comp: App1 },
                 { id: 'app-2', comp: App2 },
