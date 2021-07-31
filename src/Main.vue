@@ -78,6 +78,7 @@ export default {
         StockSel(index) {
             console.log("stocksel", index)
             this.chart = new DataCube(parent.window['tvjs_data'][index]);
+            this.stockid = parent.window['tvjs_data'][index]["name"]
             
             console.log("sele", this)
             this.resetkey++ //trigger vue component recreate
@@ -139,6 +140,7 @@ export default {
             chart: chartdata, // Data will be here,
             //chart: new DataCube({}), // Data will be here,
             indexBased: true,
+            stockid: "上证指数",
             width: window.innerWidth,
             height: window.innerHeight,
             extensions: Object.values(Extensions),
@@ -147,7 +149,7 @@ export default {
             current: 'app-1',
             top: 50,
             resetkey: 0,
-            stockid: 0,
+            //stockid: 0,
             apps: [
                 { id: 'app-1', comp: App1 },
                 { id: 'app-2', comp: App2 },

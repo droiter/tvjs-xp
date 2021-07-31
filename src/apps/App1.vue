@@ -22,7 +22,7 @@ import Data from '../../data/data.json'
 
 export default {
     name: 'App1',
-    props: ['night', 'ext', 'stockid', 'pdata', 'resetkey'],
+    props: ['night', 'ext', 'stock_id', 'pdata', 'resetkey'],
     components: {
         TradingVue
     },
@@ -30,6 +30,10 @@ export default {
         pdata: function(newVal, oldVal) { // watch it
             console.log('Prop changed: ', newVal, oldVal)
             this.dc = this.pdata
+        },
+        stock_id: function(newVal, oldVal) { // watch it
+            console.log('Prop changed: ', newVal, oldVal)
+            this.title_stock = this.stock_id
         }
     },
     methods: {
@@ -102,7 +106,7 @@ export default {
         }
         return {
             //dc: new DataCube(Data),
-            title_stock: "上证指数",
+            title_stock: this.stock_id, //"上证指数",
             dc: chartdata,
             indexBased: true,
             width: window.innerWidth,
