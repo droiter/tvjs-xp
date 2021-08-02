@@ -140,7 +140,7 @@ export default {
             chart: chartdata, // Data will be here,
             //chart: new DataCube({}), // Data will be here,
             indexBased: true,
-            stockid: "上证指数",
+            stockid: "回测样例",
             width: window.innerWidth,
             height: window.innerHeight,
             extensions: Object.values(Extensions),
