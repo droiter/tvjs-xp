@@ -4,7 +4,7 @@
             <h1><img src="./assets/logo.png"/>
                 <label>回测结果</label>
             </h1>
-            <multimenu v-tooltip.left="'OK'" :list="ext_names" @onStockSel="StockSel"/>
+            <multimenu v-tooltip.left="''" :list="ext_names" @onStockSel="StockSel"/>
             
             <!-- <multiselect v-tooltip.bottom="'OK'" :list="ext_names" @onstate="reset"/> -->
             <span class="night-mode">
@@ -113,6 +113,7 @@ export default {
         window.addEventListener('setItem0', ()=> {
             this.chart = new DataCube(parent.window['tvjs_data'][0]);
             this.ext_names = this.getMenuItem()
+            this.stockid = parent.window['tvjs_data'][0]["name"]
             
             console.log("last", this)
             /*
