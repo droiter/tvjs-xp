@@ -39,7 +39,7 @@ import Data from '../data/data.json'
 import Extensions from './index_dev'
 
 import App1 from './apps/App1.vue'
-import App2 from './apps/App2.vue'
+//import App2 from './apps/App2.vue'
 
 export default {
     name: 'app',
@@ -153,7 +153,7 @@ export default {
             //stockid: 0,
             apps: [
                 { id: 'app-1', comp: App1 },
-                { id: 'app-2', comp: App2 },
+                //{ id: 'app-2', comp: App2 },
             ]
         }
     },
