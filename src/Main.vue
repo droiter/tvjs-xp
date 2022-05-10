@@ -88,9 +88,9 @@ export default {
                 //chartdata = new DataCube(Data);
                 return []
             else {
-                var menuitem = ["上证指数"]
+                var menuitem = []
                 console.log("menu", parent.window['tvjs_data'])
-                for ( var i =1; i < Object.keys(parent.window['tvjs_data']).length; i++) {
+                for ( var i = 0; i < Object.keys(parent.window['tvjs_data']).length; i++) {
                     menuitem.push(parent.window['tvjs_data'][i]["figtitle"])
                     console.log("mi", parent.window['tvjs_data'][i]["figtitle"])
                 }
